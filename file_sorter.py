@@ -82,8 +82,7 @@ if __name__ == '__main__':
         if not os.path.exists("log"):
             os.mkdir("log")
 
-        sys.stdout = open(f'{os.getcwd()}\\log\\{
-                          datetime.datetime.now():%d_%m_%Y}.log', 'w')
+        sys.stdout = open(os.path.normpath(f'{os.getcwd()}/log/{datetime.datetime.now():%d_%m_%Y}.log'), 'wt+')
 
     try:
         with open('src/categories.json', 'r') as extensions_file:
@@ -92,12 +91,11 @@ if __name__ == '__main__':
         sort_files(path, extensions)
 
     except KeyboardInterrupt:
-        exit(
-            f'\n[{datetime.datetime.now():%H:%M:%S}] [ - ] Ctrl+C Detected. Exiting...\n')
+        print(
+            f'[{datetime.datetime.now():%H:%M:%S}] [ - ] Ctrl+C Detected. Exiting...')
 
     except BaseException as ex:
-        exit(f"\n{ex}\n")
-
+        print(f"{ex}")
+    
     finally:
-        sys.stderr.flush()
-        sys.stdout.close()
+        sys.stdout.flush()
