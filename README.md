@@ -37,4 +37,4 @@ If You Have Issues With Code [Write to me](mailto:kalivhack@gmail.com?subject=I%
 
 ## License
 
-GNU General Public License (GPL)
+unilicense
