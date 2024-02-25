@@ -16,14 +16,14 @@ def parse_args() -> dict:
     Returns:
         dict: Returns Arguments In Dictionary
     """
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(epilog="This is a Python script that organizes files in a folder by their extensions.")
 
     platforms = {
         'nt': rf'C:/Users/{getuser()}/Downloads',
         'posix': rf'/home/{getuser()}/Downloads'
     }
 
-    parser.add_argument('-p', '--path', help='The Path Of Folder To Control',
+    parser.add_argument('-p', '--path', help='Path Of Folder To Organize Files',
                         default=platforms.get(os.name), dest='path', required=False)
     parser.add_argument('-l', '--log', help='Activate Logging Mode (sys.stdout to log file)',
                         dest='bg', action='store_true', default=False, required=False)
@@ -33,7 +33,7 @@ def parse_args() -> dict:
 
 def sort_files(folder_path: str, extensions: dict) -> Never:
     """
-    _summary_: Move Files In Folders By Thair Extensions 
+    _summary_: Organize Files By Thair Extensions 
 
     Args:
         folder_path (str): The Path Of Folder Where Fuction'll Sort Files
@@ -79,6 +79,9 @@ if __name__ == '__main__':
     path, bg_mode = parse_args().values()
     
     if bg_mode:
+        if not os.path.exists("log"):
+            os.mkdir("log")
+
         sys.stdout = open(f'{os.getcwd()}\\log\\{
                           datetime.datetime.now():%d_%m_%Y}.log', 'w')
 
